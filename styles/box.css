@@ -1,0 +1,12 @@
+.box {
+	display: block;
+	position: relative;
+	width: 500px;
+	margin:200px auto;
+	color: #fff;
+	background: #60B5FF;
+	padding:20px;
+	font-family: 'Lucida sans';
+	overflow: hidden;
+	cursor: pointer;
+}
