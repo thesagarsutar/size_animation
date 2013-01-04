@@ -1,0 +1,225 @@
+<span class="button">Run Code</span><br><br>
+<div class="box">
+<img src="https://dl.dropbox.com/u/20260740/cssdeck/images/1.jpg">
+</div>
+
+<script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+
+
+*{margin:0;padding:0;}
+body{
+	background:#303030;
+}
+img{
+	border:none;
+	display:block;
+}
+
+.box {
+	display: inline-block;
+	position: absolute;
+	z-index:300;
+	top:50%;
+	left:50%;
+	margin-top:-100px;
+	margin-left:-100px;
+	border:5px solid #505050;
+	border-radius:5px;
+	box-shadow:0 8px 10px -6px #101010;
+}
+
+.button{
+	display:block;
+	position:relative;
+	font-size:15px;
+	background:#202020;
+	border-radius:5px;
+	padding:5px;
+	color:#fff;
+	cursor:pointer;
+	float:right;
+	margin:50px;
+}
+
+.button:hover{
+	background:#3C404B;
+}
+
+
+/*fade*/
+var flag=false;
+
+$(document).ready(function() {
+    $('.button').click(function(){
+			var b1 = $(this);
+			var state = b1.data('animation_state');
+			if(state=='busy'){
+				return false;
+			}
+			b1.data('animation_state','busy');
+			$('.box').attr({'class':'box box1'});
+			if(!flag){
+				$('<div class="box"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/2.jpg"></div>').insertBefore('.box1').fadeIn(800);
+				flag=true;
+			}
+			else{
+				$('<div class="box"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/1.jpg"></div>').insertBefore('.box1').fadeIn(800);
+				flag=false;
+			}
+			
+			
+			/*$('.box1').css('box-shadow','none');
+			var mrgLeft=$('.box1').width()/2;*/
+			$('.box1').fadeOut(800,function()  
+			{ $('.box1').remove();b1.data('animation_state','complete');});
+		});
+});
+
+
+
+/*uncover*/
+
+var flag=false;
+
+$(document).ready(function() {
+    $('.button').click(function(){
+			var b1 = $(this);
+			var state = b1.data('animation_state');
+			if(state=='busy'){
+				return false;
+			}
+			
+			$('.box').attr({'class':'box box1'});
+			if(!flag){
+				$('<div class="box"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/2.jpg"></div>').insertBefore('.box1');
+				flag=true;
+			}
+			else{
+				$('<div class="box"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/1.jpg"></div>').insertBefore('.box1');
+				flag=false;
+			}
+			
+			b1.data('animation_state','busy');
+			$('.box1').css('box-shadow','none');
+			var mrgLeft=$('.box1').width()/2;
+			$('.box1').stop(true,false).animate({'width':0,'margin-left':mrgLeft},1000,function()  
+			{$('.box1').remove(); b1.data('animation_state','complete');});
+		});
+});
+
+
+
+/*cover*/
+var flag=false;
+
+$(document).ready(function() {
+    $('.button').click(function(){
+			var b1 = $(this);
+			var state = b1.data('animation_state');
+			if(state=='busy'){
+				return false;
+			}
+			
+			var zindex=parseInt($('.box').css('z-index'));
+			
+			$('.box').attr({'class':'box box1'});
+			b1.data('animation_state','busy');
+			if(!flag){
+				$('<div class="box boxnew"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/2.jpg"></div>').insertBefore('.box1');
+				flag=true;
+			}
+			else{
+				$('<div class="box boxnew"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/1.jpg"></div>').insertBefore('.box1');
+				flag=false;
+			}
+			
+			$('.boxnew').css({'box-shadow':'none','z-index':zindex+1});
+			var w=$('.boxnew').width();
+			$('.boxnew').css('width',0);
+			$('.boxnew').stop(true,false).animate({'width':w},1000,
+			function()  {
+					$('.box1').remove(); 	
+					b1.data('animation_state','complete');
+					$('.boxnew').removeAttr('style').attr({'class':'box'});
+			});
+		});
+});
+
+/*PushRight*/
+var flag=false;
+
+$(document).ready(function() {
+    $('.button').click(function(){
+			var b1 = $(this);
+			var state = b1.data('animation_state');
+			if(state=='busy'){
+				return false;
+			}
+			
+			b1.data('animation_state','busy');
+			$('.box').attr({'class':'box box1'});
+			if(!flag){
+				$('<div class="box box2"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/2.jpg"></div>').insertBefore('.box1');
+				flag=true;
+			}
+			else{
+				$('<div class="box box2"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/1.jpg"></div>').insertBefore('.box1');
+				flag=false;
+			}
+			
+			
+			var h1=$('.box1 img').height();
+			var h2=$('.box2 img').height();
+			var mrgLeft=$('.box1').width()/2;
+			var w2=$('.box2 img').width();
+			$('.box2 img').css({'width':0,'height':h2});
+			$('.box2 img').animate({'width':w2,'height':h2},1000);
+			$('.box1').animate({'margin-left':mrgLeft},1000);
+			$('.box1 img').stop(true,false).animate({'width':0,'height':h1},1000,
+					function()  {
+						$('.box1').remove(); 
+						$('.box2').removeAttr('style').attr({'class':'box'});
+						b1.data('animation_state','complete');
+			});
+		});
+});
+
+
+/*pushDown*/
+var flag=false;
+
+$(document).ready(function() {
+    $('.button').click(function(){
+			var b1 = $(this);
+			var state = b1.data('animation_state');
+			if(state=='busy'){
+				return false;
+			}
+			
+			b1.data('animation_state','busy');
+			$('.box').attr({'class':'box box1'});
+			if(!flag){
+				$('<div class="box box2"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/2.jpg"></div>').insertBefore('.box1');
+				flag=true;
+			}
+			else{
+				$('<div class="box box2"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/1.jpg"></div>').insertBefore('.box1');
+				flag=false;
+			}
+			
+			
+			var w1=$('.box1 img').width();
+			var h2=$('.box2 img').height();
+			var mrgTop=$('.box1').height()/2;
+			var w2=$('.box2 img').width();
+			$('.box2 img').css({'width':w2,'height':0});
+			$('.box2 img').animate({'width':w2,'height':h2},1000);
+			$('.box1').animate({'margin-top':mrgTop},1000);
+			$('.box1 img').stop(true,false).animate({'width':w1,'height':0},1000,
+					function()  {
+						$('.box1').remove(); 
+						$('.box2').removeAttr('style').attr({'class':'box'});
+						b1.data('animation_state','complete');
+			});
+		});
+});
