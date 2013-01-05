@@ -26,6 +26,7 @@ img{
 	border:5px solid #505050;
 	border-radius:5px;
 	box-shadow:0 8px 10px -6px #101010;
+	overflow:hidden;/*for slide, cover effect*/
 }
 
 .button{
@@ -223,3 +224,172 @@ $(document).ready(function() {
 			});
 		});
 });
+
+/*Push Left*/
+var flag=false;
+
+$(document).ready(function() {
+    $('.button').click(function(){
+			var b1 = $(this);
+			var state = b1.data('animation_state');
+			if(state=='busy'){
+				return false;
+			}
+			
+			b1.data('animation_state','busy');
+			$('.box').attr({'class':'box box1'});
+			if(!flag){
+				$('<div class="box box2"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/2.jpg"></div>').insertBefore('.box1');
+				flag=true;
+			}
+			else{
+				$('<div class="box box2"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/1.jpg"></div>').insertBefore('.box1');
+				flag=false;
+			}
+			
+			
+			var h1=$('.box1 img').height();
+			var h2=$('.box2 img').height();
+			var mrgTop=$('.box1').height()/2;
+			var w2=$('.box2 img').width();
+			$('.box2').css({marginLeft:100});
+			$('.box1 img').animate({'height':h1,'width':0},1000);
+			$('.box2 img').css({'height':h2,'width':0});
+			$('.box2 img').animate({'height':h2,'width':w2},1000);
+			$('.box2').animate({marginLeft:-100},1000,
+					function()  {
+						$('.box1').remove(); 
+						$('.box2').removeAttr('style').attr({'class':'box'});
+						b1.data('animation_state','complete');
+			});
+		});
+});
+
+/*PushUp*/
+var flag=false;
+
+$(document).ready(function() {
+    $('.button').click(function(){
+			var b1 = $(this);
+			var state = b1.data('animation_state');
+			if(state=='busy'){
+				return false;
+			}
+			
+			b1.data('animation_state','busy');
+			$('.box').attr({'class':'box box1'});
+			if(!flag){
+				$('<div class="box box2"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/2.jpg"></div>').insertBefore('.box1');
+				flag=true;
+			}
+			else{
+				$('<div class="box box2"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/1.jpg"></div>').insertBefore('.box1');
+				flag=false;
+			}
+			
+			
+			var w1=$('.box1 img').width();
+			var h2=$('.box2 img').height();
+			var w2=$('.box2 img').width();
+			var mrgTop=$('.box1').height()/2;
+			$('.box2').css({marginTop:mrgTop});
+			$('.box1 img').animate({'height':0,'width':w1},1000);
+			$('.box2 img').css({'height':0,'width':w2});
+			$('.box2 img').animate({'height':h2,'width':w2},1000);
+			$('.box2').animate({marginTop:-mrgTop},1000,
+					function()  {
+						$('.box1').remove(); 
+						$('.box2').removeAttr('style').attr({'class':'box'});
+						b1.data('animation_state','complete');
+			});
+		});
+});
+
+/*zoom*/
+var flag=false;
+
+$(document).ready(function() {
+    $('.button').click(function(){
+			var b1 = $(this);
+			var state = b1.data('animation_state');
+			if(state=='busy'){
+				return false;
+			}
+			
+			b1.data('animation_state','busy');
+			$('.box').attr({'class':'box box1'});
+			if(!flag){
+				$('<div class="box box2"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/2.jpg"></div>').insertBefore('.box1');
+				flag=true;
+			}
+			else{
+				$('<div class="box box2"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/1.jpg"></div>').insertBefore('.box1');
+				flag=false;
+			}
+			
+			
+			var w1=$('.box1 img').width();
+			var h2=$('.box2 img').height();
+			var mrgTop=$('.box1').height()/2;
+			var w2=$('.box2 img').width();
+			$('.box2').css({'margin-top':0,marginLeft:0});
+			$('.box1').fadeOut(800);
+			$('.box2 img').css({'height':0});
+			$('.box2 img').animate({'height':h2},1000);
+			$('.box2').animate({'margin-top':-100,marginLeft:-100},1000,
+					function()  {
+						$('.box1').remove(); 
+						$('.box2').removeAttr('style').attr({'class':'box'});
+						b1.data('animation_state','complete');
+			});
+		});
+});
+
+/*slide-right*/
+var flag=false;
+
+$(document).ready(function() {
+    $('.button').click(function(){
+			var b1 = $(this);
+			var state = b1.data('animation_state');
+			if(state=='busy'){
+				return false;
+			}
+			
+			$('.box').attr({'class':'box box1'});
+			if(!flag){
+				$('<div class="box box2"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/2.jpg"></div>').insertBefore('.box1');
+				flag=true;
+			}
+			else{
+				$('<div class="box box2"><img src="https://dl.dropbox.com/u/20260740/cssdeck/images/1.jpg"></div>').insertBefore('.box1');
+				flag=false;
+			}
+			
+			b1.data('animation_state','busy');
+			var mrgLeft=$('.box1').width()/2;
+			var w2=$('.box2 img').width();
+			$('.box2 img').css({marginLeft:-w2});
+			$('.box2 img').animate({marginLeft:0},1000);
+			$('.box1').stop(true,false).animate({'width':0,'margin-left':mrgLeft},1000,
+				function()  {
+						$('.box1').remove(); 
+						$('.box2').removeAttr('style').attr({'class':'box'});
+					 	b1.data('animation_state','complete');
+					});
+		});
+});
+
+
+
+.coderos {
+background: grey;
+border: solid black;
+border-width: 10px 10px 10px 10px;
+font: 13px 'Courier New', Courier, monospace;
+line-height: 16px;
+margin: 10px 0 10px 10px;
+overflow: auto;
+padding: 10px 10px 10px; width: 90%;
+color: white;
+}
